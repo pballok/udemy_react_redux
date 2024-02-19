@@ -1,7 +1,12 @@
-function ImageShow() {
+import { Image } from '../types';
+
+interface ImageShowProps {
+    image: Image,
+}
+function ImageShow({image} : ImageShowProps) {
     return (
         <div>
-            ImageShow
+            <img src={image.url} alt={image.description}/>
         </div>
     );
 }
