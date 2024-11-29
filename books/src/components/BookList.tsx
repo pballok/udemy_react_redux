@@ -1,15 +1,11 @@
-import {Book} from "../Book";
 import BookShow from "./BookShow";
+import useBooksContext from "../hooks/use-books-context";
 
-interface BookListProps {
-    books: Book[],
-    onDelete: (id: number) => void,
-    onEdit: (id: number, newTitle: string) => void,
-}
+function BookList() {
+    const { books } = useBooksContext();
 
-function BookList({ books, onDelete, onEdit }: BookListProps) {
     const renderedBooks = books.map((book) => {
-        return <BookShow key={book.id} book={book} onDelete={onDelete} onEdit={onEdit}/>;
+        return <BookShow key={book.id} book={book} />;
     });
 
     return (

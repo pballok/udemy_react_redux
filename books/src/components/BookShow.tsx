@@ -1,19 +1,19 @@
-import {useState} from "react";
-
-import {Book} from "../Book";
+import { Book } from "../Book";
 import BookEdit from "./BookEdit";
+import useBooksContext from "../hooks/use-books-context";
+
+import { useState } from "react";
 
 interface BookShowProps {
     book: Book,
-    onDelete: (id: number) => void,
-    onEdit: (id: number, newTitle: string) => void,
 }
 
-function BookShow({ book, onDelete, onEdit }: BookShowProps) {
+function BookShow({ book }: BookShowProps) {
     const [showEdit, setShowEdit] = useState(false);
 
-    const handleSubmit = (newTitle: string) => {
-        onEdit(book.id, newTitle);
+    const { deleteBookById } = useBooksContext();
+
+    const handleSubmit = () => {
         setShowEdit(false);
     }
 
@@ -30,7 +30,7 @@ function BookShow({ book, onDelete, onEdit }: BookShowProps) {
                 <button className="edit" onClick={() => setShowEdit(!showEdit)}>
                     Edit
                 </button>
-                <button className="delete" onClick={() => onDelete(book.id)}>
+                <button className="delete" onClick={() => deleteBookById(book.id)}>
                     Delete
                 </button>
             </div>

@@ -1,17 +1,22 @@
-import React, {FormEvent, useState} from "react";
 import {Book} from "../Book";
+import useBooksContext from "../hooks/use-books-context";
+
+import React, { useState } from "react";
 
 interface BookEditProps {
     book: Book,
-    onSubmit: (newTitle: string) => void,
+    onSubmit: () => void,
 }
 
 function BookEdit({ book, onSubmit }: BookEditProps) {
     const [title, setTitle] = useState(book.title);
 
+    const { editBookById } = useBooksContext();
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        onSubmit(title);
+        onSubmit();
+        editBookById(book.id, title).then();
     }
 
     return (
